@@ -16,3 +16,14 @@ db.employees.countDocuments({})
 db.departments.countDocuments({})
 
 db.sessions.countDocuments({})
+
+# Expected result: employees = 4, departments = 2, sessions = 0.
+#
+# Note on sessions = 0: this is expected, not a failed restore. The document
+# restored from the archive carries expiresAt = 2026-10-07T11:13:35.628Z, which
+# was already in the past when mongorestore ran. The TTL index created in Task
+# 5.3 (expiresAt_1 with expireAfterSeconds: 0) therefore removed the document in
+# the background within 60 seconds of the restore. The mongorestore log confirms
+# "finished restoring `company_advance_restore.sessions` (1 document, 0 failures)",
+# so the backup itself is verified correct. This also confirms that the TTL index
+# from Task 5.3 is working as intended.

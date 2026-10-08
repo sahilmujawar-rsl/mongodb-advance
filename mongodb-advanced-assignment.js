@@ -218,7 +218,7 @@ company_advance> db.employees
     planCacheShapeHash: 'E5A42DED',
     planCacheKey: 'D43CA850',
     optimizationTimeMillis: 0,
-    optimizationTimeMicros: 273,
+    optimizationTimeMicros: 288,
     maxIndexedOrSolutionsReached: false,
     maxIndexedAndSolutionsReached: false,
     maxScansToExplodeReached: false,
@@ -247,8 +247,8 @@ company_advance> db.employees
   executionStats: {
     executionSuccess: true,
     nReturned: 2,
-    executionTimeMillis: 1,
-    executionTimeMicros: 1195,
+    executionTimeMillis: 0,
+    executionTimeMicros: 477,
     totalKeysExamined: 2,
     totalDocsExamined: 2,
     executionStages: {
@@ -336,9 +336,3 @@ db.sessions.createIndex(
 
 db.sessions.getIndexes();
 db.sessions.find();
-
-// Task 6: Backup and Restore
-// Verify the restored employee, department, and session collection counts.
-db.employees.countDocuments({})
-db.departments.countDocuments({})
-db.sessions.countDocuments({})
