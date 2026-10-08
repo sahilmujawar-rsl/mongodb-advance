@@ -1,0 +1,18 @@
+# Run these commands from a shell at the repository root.
+
+# Task 6.1: Back up the source database into a gzip-compressed archive.
+mongodump --db company_advance --archive=company_advance.archive --gzip
+
+# Task 6.2: Restore into a separate database; do not overwrite the source.
+mongorestore --archive=company_advance.archive --gzip --nsFrom="company_advance.*" --nsTo="company_advance_restore.*"
+
+# Task 6.3: Verify the restored collection counts.
+use company_advance_restore
+
+show collections
+
+db.employees.countDocuments({})
+
+db.departments.countDocuments({})
+
+db.sessions.countDocuments({})
