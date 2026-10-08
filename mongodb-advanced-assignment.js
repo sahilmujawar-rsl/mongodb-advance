@@ -91,13 +91,16 @@ db.employees.updateMany(
   { $set: { "certifications.$[cert].status": "Renewal Due" } },
   {
     arrayFilters: [
-      { "cert.name": "MongoDB", "cert.expiryYear": { $lt: 2027 } },
+      { "cert.expiryYear": { $lt: 2027 } },
     ],
   },
 );
 
-// Verify the final certification statuses.
-db.employees.find({name:"John"});
+// Verify the final certification statuses for John and Alice.
+db.employees.find(
+  { name: { $in: ["John", "Alice"] } },
+  { _id: 0, name: 1, experience: 1, active: 1, certifications: 1 },
+);
 
 // Task 3: Bulk Write Operations
 
